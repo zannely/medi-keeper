@@ -23,6 +23,11 @@ angular.module('todoApp')
                 method: 'DELETE',
                 url: apiEndpoint + '/api/Todo/' + id
             });
+        },
+
+        
+        getMax : function(name){
+            return $http.get(apiEndpoint + '/api/Todo/Max/' + name);
         }
     };
 }]);

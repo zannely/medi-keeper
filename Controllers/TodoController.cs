@@ -23,7 +23,7 @@ namespace TodoApi.Controllers
 
             if (_context.TodoItems.Count() == 0)
             {
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                _context.TodoItems.Add(new TodoItem { Name = "Item1" , Cost = 100});
                 _context.SaveChanges();
             }
         }
@@ -112,6 +112,25 @@ namespace TodoApi.Controllers
         private bool TodoItemExists(long id)
         {
             return _context.TodoItems.Any(e => e.Id == id);
+        }
+
+        private bool TodoItemNameExists(string name)
+        {
+            return _context.TodoItems.Any(n => n.Name == name);
+        }
+
+        // GET: api/Todo/Max/itemName
+        [HttpGet("Max/{name}")]
+        public ActionResult<decimal> GetMax(string name)
+        {
+            var cost = _context.TodoItems.OrderByDescending(c => c.Cost).FirstOrDefault(n => n.Name == name).Cost;
+
+            if (!TodoItemNameExists(name))
+            {
+                return NotFound();
+            }
+
+            return cost;
         }
     }
 }

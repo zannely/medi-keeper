@@ -6,10 +6,12 @@ angular.module('todoApp')
     $scope.todoList = null;
     $scope.editingInProgress = false;
     $scope.newToDoName = "";
+    $scope.newToDoCost = 0;
 
 
     $scope.editInProgressTodo = {
         name: "",
+        cost: 0,
         isComplete: false,
         id: 0
     };
@@ -21,6 +23,7 @@ angular.module('todoApp')
         if (todo.edit) {
             $scope.editInProgressTodo.name = todo.name;
             $scope.editInProgressTodo.id = todo.id;
+            $scope.editInProgressTodo.cost = todo.cost;
             $scope.editInProgressTodo.isComplete = todo.isComplete;
             $scope.editingInProgress = true;
         } else {
@@ -63,10 +66,12 @@ angular.module('todoApp')
         }
         todoListSvc.postItem({
             'Name': $scope.newToDoName,
+            'Cost': $scope.newToDoCost,
             'IsComplete': false
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
+            $scope.newToDoCost = 0;
             $scope.populate();
         }).error(function (err) {
             $scope.error = err;
