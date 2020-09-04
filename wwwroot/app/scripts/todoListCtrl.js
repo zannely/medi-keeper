@@ -8,7 +8,7 @@ angular.module('todoApp')
     $scope.newToDoName = "";
     $scope.newToDoCost = 0;
 
-
+    console.log("here");
     $scope.editInProgressTodo = {
         name: "",
         cost: 0,
@@ -17,8 +17,32 @@ angular.module('todoApp')
     };
 
     
+    $scope.showMax = function () {
+        console.log("getting max stuffs");
+        todoListSvc.getMaxPrices().success(function (results) {
+            $scope.todoList = results;
+            $scope.loadingMessage = "";
+        }).error(function (err) {
+            $scope.error = err;
+            $scope.loadingMessage = "";
+        })
+    };
+
+    $scope.showMaxByName = function () {
+        console.log($scope.searchName);
+        todoListSvc.getMaxPrice($scope.searchName).success(function (results) {
+            $scope.todoList = [];
+            $scope.todoList.push(results);
+            $scope.loadingMessage = "";
+        }).error(function (err) {
+            $scope.error = err;
+            $scope.loadingMessage = "";
+        })
+    }
 
     $scope.editSwitch = function (todo) {
+        console.log('i am editswitch');
+
         todo.edit = !todo.edit;
         if (todo.edit) {
             $scope.editInProgressTodo.name = todo.name;
@@ -32,7 +56,9 @@ angular.module('todoApp')
     };
 
     $scope.populate = function () {
+        console.log('i am populate');
         todoListSvc.getItems().success(function (results) {
+            console.log('Hi', results);
             $scope.todoList = results;
             $scope.loadingMessage = "";
         }).error(function (err) {
@@ -41,6 +67,8 @@ angular.module('todoApp')
         })
     };
     $scope.delete = function (id) {
+        console.log('i am delete');
+
         todoListSvc.deleteItem(id).success(function (results) {
             $scope.loadingMessage = "";
             $scope.populate();
@@ -50,8 +78,15 @@ angular.module('todoApp')
         })
     };
     $scope.update = function (todo) {
+        console.log('i am update');
+
         $scope.editInProgressTodo.isComplete = todo.isComplete;
-        todoListSvc.putItem($scope.editInProgressTodo).success(function (results) {
+        todoListSvc.putItem({
+            'id': todo.id,
+            'name': $scope.editInProgressTodo.name,
+            'cost': parseInt($scope.editInProgressTodo.cost),
+            'isComplete': false
+        }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.populate();
             $scope.editSwitch(todo);
@@ -61,13 +96,15 @@ angular.module('todoApp')
         })
     };
     $scope.add = function () {
+        console.log('i am add');
+
         if ($scope.editingInProgress) {
             $scope.editingInProgress = false;
         }
         todoListSvc.postItem({
-            'Name': $scope.newToDoName,
-            'Cost': $scope.newToDoCost,
-            'IsComplete': false
+            'name': $scope.newToDoName,
+            'cost': parseInt($scope.newToDoCost),
+            'isComplete': false
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
@@ -78,5 +115,15 @@ angular.module('todoApp')
             $scope.loadingMsg = "";
         })
     };
+    // $scope.populate = function () {
+    //     console.log('i am populate 2');
 
+    //     todoListSvc.getMaxPrices().success(function (results) {
+    //         $scope.todoList = results;
+    //         $scope.loadingMessage = "";
+    //     }).error(function (err) {
+    //         $scope.error = err;
+    //         $scope.loadingMessage = "";
+    //     })
+    // };
 }]);

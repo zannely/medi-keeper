@@ -7,10 +7,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*" )]
     [Route("api/[controller]")] 
     [ApiController]
     public class TodoController : Controller
@@ -21,11 +23,11 @@ namespace TodoApi.Controllers
         {
             _context = context;
 
-            if (_context.TodoItems.Count() == 0)
-            {
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" , Cost = 100});
-                _context.SaveChanges();
-            }
+            // if (_context.TodoItems.Count() == 0)
+            // {
+            //     _context.TodoItems.Add(new TodoItem { Name = "Item1" , Cost = 100});
+            //     _context.SaveChanges();
+            // }
         }
 
         // GET: api/Todo
@@ -119,11 +121,11 @@ namespace TodoApi.Controllers
             return _context.TodoItems.Any(n => n.Name == name);
         }
 
-        // GET: api/Todo/Max/itemName
-        [HttpGet("Max/{name}")]
-        public ActionResult<decimal> GetMax(string name)
+        // GET: api/Todo/MaxPrice/itemName
+        [HttpGet("MaxPrice/{name}")]
+        public ActionResult<TodoItem> GetMaxPrice(string name)
         {
-            var cost = _context.TodoItems.OrderByDescending(c => c.Cost).FirstOrDefault(n => n.Name == name).Cost;
+            var cost = _context.TodoItems.OrderByDescending(c => c.Cost).FirstOrDefault(n => n.Name == name);
 
             if (!TodoItemNameExists(name))
             {
@@ -132,5 +134,17 @@ namespace TodoApi.Controllers
 
             return cost;
         }
+
+        // GET: api/Todo/MaxPrices
+        [HttpGet("MaxPrices")]
+        public ActionResult<List<TodoItem>> GetMaxPrices()
+        {
+
+            return _context.TodoItems.GroupBy(x => x.Name, x => x).Select(g => g.OrderByDescending(x => x.Cost).First()).ToList();
+
+
+        }
+
+
     }
 }

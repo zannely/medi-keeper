@@ -4,9 +4,9 @@ angular.module('todoApp')
 
     $http.defaults.useXDomain = true;
     delete $http.defaults.headers.common['X-Requested-With']; 
-
     return {
         getItems : function(){
+            console.log('Gtting items');
             return $http.get(apiEndpoint + '/api/Todo');
         },
         getItem : function(id){
@@ -23,11 +23,12 @@ angular.module('todoApp')
                 method: 'DELETE',
                 url: apiEndpoint + '/api/Todo/' + id
             });
+        },   
+        getMaxPrice : function(name){
+            return $http.get(apiEndpoint + '/api/Todo/MaxPrice/' + name);
         },
-
-        
-        getMax : function(name){
-            return $http.get(apiEndpoint + '/api/Todo/Max/' + name);
+        getMaxPrices : function(){
+            return $http.get(apiEndpoint + '/api/Todo/MaxPrices');
         }
     };
 }]);
