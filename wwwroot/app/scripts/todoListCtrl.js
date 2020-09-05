@@ -85,7 +85,7 @@ angular.module('todoApp')
         }
         todoListSvc.postItem({
             'name': $scope.newToDoName,
-            'cost': parseInt($scope.newToDoCost),
+            'cost': $scope.newToDoCost,
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
