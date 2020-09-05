@@ -4,6 +4,6 @@
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public float Cost { get; set; }
+        public int Cost { get; set; }
     }
 }

@@ -6,7 +6,7 @@ angular.module('todoApp')
     $scope.todoList = null;
     $scope.editingInProgress = false;
     $scope.newToDoName = "";
-    $scope.newToDoCost = 0.0;
+    $scope.newToDoCost = 5;
     $scope.editInProgressTodo = {
         name: "",
         cost: 0,
@@ -69,7 +69,7 @@ angular.module('todoApp')
         todoListSvc.putItem({
             'id': todo.id,
             'name': $scope.editInProgressTodo.name,
-            'cost': parseFloat($scope.editInProgressTodo.cost),
+            'cost': parseInt($scope.editInProgressTodo.cost),
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.populate();
@@ -85,11 +85,11 @@ angular.module('todoApp')
         }
         todoListSvc.postItem({
             'name': $scope.newToDoName,
-            'cost': parseFloat($scope.newToDoCost),
+            'cost': parseInt($scope.newToDoCost),
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
-            $scope.newToDoCost = "";
+            // $scope.newToDoCost = "";
             $scope.populate();
         }).error(function (err) {
             $scope.error = err;
