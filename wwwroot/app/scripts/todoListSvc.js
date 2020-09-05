@@ -6,7 +6,6 @@ angular.module('todoApp')
     delete $http.defaults.headers.common['X-Requested-With']; 
     return {
         getItems : function(){
-            console.log('Gtting items');
             return $http.get(apiEndpoint + '/api/Todo');
         },
         getItem : function(id){

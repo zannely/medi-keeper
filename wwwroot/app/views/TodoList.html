@@ -19,13 +19,14 @@
                             placeholder="ItemName">
                     </div>
                     <div class="col-auto my-1">
-                        <button ng-click="showMaxByName();" class="btn btn-dark">Search</button>
+                        <button ng-click="showMaxByName();" class="btn btn-dark" id="validateSearch">Search</button>
                     </div>
                 </div>
                 <br />
 
                 <!-- Add Item
             ================================================== -->
+
                 <div class="form-row align-items-center">
                     <h5>Add Item:</h5>
                     <div class="col-sm-3 my-1">
@@ -33,17 +34,20 @@
                         <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem"
                             placeholder="ItemName">
                     </div>
+
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="inlineFormInputGroupUsername">Cost</label>
                         <div class="input-group">
                             <input ng-model="newToDoCost" class="form-control" id="inlineFormInputGroupUsername"
-                                placeholder="100">
+                                placeholder="100" type="text"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
                     <div class="col-auto my-1">
-                        <button ng-click="add();" class="btn btn-dark">Add</button>
+                        <button ng-click="add();" class="btn btn-dark" id="validateAdd">Add</button>
                     </div>
                 </div>
+
                 <br />
                 <!-- Display Table With List Of Items
             ================================================== -->
@@ -83,15 +87,20 @@
 
                 </table>
 
-        <!-- TODO : fix this-->
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button ng-click="showMax();" class="btn btn-default">Show Max Items</button>
-            </span>
-        </div>
+                <!-- Display the max price for each item in the list-->
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <!-- <div class="input-group"> -->
+                    <span class="input-group-btn">
+                        <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
+                    </span>
+                    <!-- </div> -->
 
-
-
+                    <!-- Display all-->
+                    <!-- <div class="input-group"> -->
+                    <span class="input-group-btn">
+                        <button ng-click="populate();" class="btn btn-default">Show All Items</button>
+                    </span>
+                </div>
 
             </div>
         </div>
@@ -100,3 +109,26 @@
     <!--div class panel -->
 </div>
 <!--div populate() -->
+
+<script>
+    //  Bind the event handler to the "submit" JavaScript event
+    $('#validateAdd').click(function () {
+        // Get the value
+        var name = $('#inlineFormAddItem').val();
+        // Check if empty
+        if (name.length < 1) {
+            alert('Item name cannot be empty.');
+            return false;
+        }
+    });
+
+    $('#validateSearch').click(function () {
+        // Get the value
+        var search = $('#inlineFormInputName').val();
+        // Check if empty 
+        if (search.length < 1) {
+            alert('Item name cannot be empty.');
+            return false;
+        }
+    });
+</script>

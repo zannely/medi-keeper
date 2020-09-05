@@ -18,16 +18,11 @@ namespace TodoApi.Controllers
     public class TodoController : Controller
     {
         private readonly TodoContext _context;
+        
 
         public TodoController(TodoContext context)
         {
             _context = context;
-
-            // if (_context.TodoItems.Count() == 0)
-            // {
-            //     _context.TodoItems.Add(new TodoItem { Name = "Item1" , Cost = 100});
-            //     _context.SaveChanges();
-            // }
         }
 
         // GET: api/Todo
@@ -37,7 +32,7 @@ namespace TodoApi.Controllers
             return await _context.TodoItems.ToListAsync();
         }
 
-        // GET: api/Todo/5
+        // GET: api/Todo/id
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
         {
@@ -51,9 +46,7 @@ namespace TodoApi.Controllers
             return todoItem;
         }
 
-        // PUT: api/Todo/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // PUT: api/Todo/id
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
         {
@@ -84,8 +77,6 @@ namespace TodoApi.Controllers
         }
 
         // POST: api/Todo
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
@@ -95,7 +86,7 @@ namespace TodoApi.Controllers
             return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
         }
 
-        // DELETE: api/Todo/5
+        // DELETE: api/Todo/id
         [HttpDelete("{id}")]
         public async Task<ActionResult<TodoItem>> DeleteTodoItem(long id)
         {
@@ -139,10 +130,29 @@ namespace TodoApi.Controllers
         [HttpGet("MaxPrices")]
         public ActionResult<List<TodoItem>> GetMaxPrices()
         {
+            return NonDuplicatePrice(_context.TodoItems
+            .OrderByDescending(c => c.Cost)
+            .ToList());
+        }
 
-            return _context.TodoItems.GroupBy(x => x.Name, x => x).Select(g => g.OrderByDescending(x => x.Cost).First()).ToList();
-
-
+        public List<TodoItem> NonDuplicatePrice(List<TodoItem> sortedList)
+        {
+            List<TodoItem> maxPriceList = new List<TodoItem>();
+            foreach(TodoItem item in sortedList)
+            {
+                bool nonDuplicate = true;
+                foreach(TodoItem noDupItem in maxPriceList)
+                {
+                    if (noDupItem.Name == item.Name)
+                    {
+                        nonDuplicate = false;
+                        break;
+                    }
+                }
+                if (nonDuplicate)
+                    maxPriceList.Add(item);
+            }
+            return maxPriceList;
         }
 
 
