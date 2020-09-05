@@ -3,153 +3,100 @@
     <p>{{loadingMessage}}</p>
     <div class="panel">
 
-<!-- Add Items
-================================================== -->
-        <!-- <div class="container-fluid">
-            <div class="d-flex justify-content-center ">
 
+        <!-- Display list of items and search for max item given item name
+        ================================================== -->
+        <div class="d-flex justify-content-center ">
+            <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;">
 
-                    <form style= "border:thin gray solid; margin:30px; padding:30px;">
-                        <h5>ADD NEW ITEM</h5>
-
-                        <div class="form-row align-items-center">
-                        <div class="col-sm-3 my-1">
-                            <label class="sr-only" for="inlineFormInputName">Item Name</label>
-                            <input ng-model="newToDoName" class="form-control" id="inlineFormInputName" placeholder="ItemName">
-                        </div>
-                        <div class="col-sm-3 my-1">
-                            <label class="sr-only" for="inlineFormInputGroupUsername">Cost</label>
-                            <div class="input-group">
-                            <input ng-model="newToDoCost" class="form-control" id="inlineFormInputGroupUsername" placeholder="100">
-                            </div>
-                        </div>
-                        <div class="col-auto my-1">
-                            <button ng-click="add();" class="btn btn-dark">Add</button>
-                        </div>
-                        </div>
-                    </form>
-
-            </div>
-
-        </div> -->
-
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button ng-click="showMax();" class="btn btn-default">Show Max Items</button>
-            </span>
-        </div>
-        <!-- <div class="input-group">
-            <input ng-model="newToDoName" class="form-control" />
-            <input ng-model="newToDoCost" class="form-control" />
-            <span class="input-group-btn">
-                <button ng-click="add();" class="btn btn-default">Add</button>
-            </span>
-        </div> -->
-        <!-- <div class="input-group">
-            <input ng-model="searchName" class="form-control" />
-            <span class="input-group-btn">
-                <button ng-click="showMaxByName();" class="btn btn-default">Search Max</button>
-            </span>
-        </div> -->
-
-
-
-            <!-- Search Max Price by Item Name
-            ================================================== -->  
-
-            <!-- <div class="form-row align-items-center">
-                <h5>Enter item name to get max price:</h5>
-                <div class="col-sm-3 my-1">
-                    <label class="sr-only" for="inlineFormInputName">Item Name</label>
-                    <input ng-model="searchName" class="form-control" id="inlineFormInputName" placeholder="ItemName">
+                <!-- Search Max Price by Item Name
+        ================================================== -->
+                <div class="form-row align-items-center">
+                    <h5>Enter item name to get max price:</h5>
+                    <div class="col-sm-3 my-1">
+                        <label class="sr-only" for="inlineFormInputName">Item Name</label>
+                        <input ng-model="searchName" class="form-control" id="inlineFormInputName"
+                            placeholder="ItemName">
+                    </div>
+                    <div class="col-auto my-1">
+                        <button ng-click="showMaxByName();" class="btn btn-dark">Search</button>
+                    </div>
                 </div>
-                <div class="col-auto my-1">
-                    <button ng-click="showMaxByName();" class="btn btn-dark">Search</button>
-                </div>
-                </div> -->
+                <br />
 
-  <!-- Display list of items and search for max item given item name
-================================================== -->      
-    <div class="d-flex justify-content-center ">
-        <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;">
-
-        <!-- Search Max Price by Item Name
-        ================================================== -->  
-
-        <div class="form-row align-items-center">
-            <h5>Enter item name to get max price:</h5>
-            <div class="col-sm-3 my-1">
-                <label class="sr-only" for="inlineFormInputName">Item Name</label>
-                <input ng-model="searchName" class="form-control" id="inlineFormInputName" placeholder="ItemName">
-            </div>
-            <div class="col-auto my-1">
-                <button ng-click="showMaxByName();" class="btn btn-dark">Search</button>
-            </div>
-            </div>
-
-        
-        <br />
-
-            <!-- Add Item
-            ================================================== -->  
+                <!-- Add Item
+            ================================================== -->
                 <div class="form-row align-items-center">
                     <h5>Add Item:</h5>
                     <div class="col-sm-3 my-1">
-                        <label class="sr-only" for="inlineFormInputName">Item Name</label>
-                        <input ng-model="newToDoName" class="form-control" id="inlineFormInputName" placeholder="ItemName">
+                        <label class="sr-only" for="inlineFormAddItem">Item Name</label>
+                        <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem"
+                            placeholder="ItemName">
                     </div>
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="inlineFormInputGroupUsername">Cost</label>
                         <div class="input-group">
-                        <input ng-model="newToDoCost" class="form-control" id="inlineFormInputGroupUsername" placeholder="100">
+                            <input ng-model="newToDoCost" class="form-control" id="inlineFormInputGroupUsername"
+                                placeholder="100">
                         </div>
                     </div>
                     <div class="col-auto my-1">
                         <button ng-click="add();" class="btn btn-dark">Add</button>
                     </div>
-                    </div>
+                </div>
+                <br />
+                <!-- Display Table With List Of Items
+            ================================================== -->
+                <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Item Name</th>
+                            <th>Cost</th>
+                            <th>Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="item in todoList">
+                            <td>
+                                <span>{{item.id}}</span>
+                            </td>
+                            <td>
+                                <span>{{item.name}}</span>
+                                <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.name"
+                                    class="form-control" />
+                            </td>
+                            <td>
+                                <span>{{item.cost}}</span>
+                                <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.cost"
+                                    class="form-control" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="item.edit || editingInProgress">
+                                    <a data-ng-click="editSwitch(item)" href="javascript:;">Edit</a> |
+                                    <a data-ng-click="delete(item.id)" href="javascript:;">Delete</a></p>
+                                <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a>
+                                    <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>
+                            </td>
+                        </tr>
+                    </tbody>
 
-            <br />
-            <!-- Display Table With List Of Items
-            ================================================== -->  
-            <table class="table table-striped" id="navigateTable" style= "border:1px solid #cecece;">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Item Name</th>
-                        <th>Cost</th>
-                        <th>Edit/Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="item in todoList">
-                        <td>
-                            <span>{{item.id}}</span>
-                        </td>
-                        <td>
-                            <span>{{item.name}}</span>
-                            <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.name" class="form-control" />                        
-                        </td>
-                        <td>
-                            <span>{{item.cost}}</span>
-                            <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.cost" class="form-control" />                        
+                </table>
 
-                        </td>
-                        <td>
-                            <p data-ng-hide="item.edit || editingInProgress">
-                                <a data-ng-click="editSwitch(item)" href="javascript:;">Edit</a> | 
-                                <a data-ng-click="delete(item.id)" href="javascript:;">Delete</a></p>
-                                <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a> | 
-                                <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>                       
-                        </td>
+        <!-- TODO : fix this-->
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button ng-click="showMax();" class="btn btn-default">Show Max Items</button>
+            </span>
+        </div>
 
-                    </tr>
-                </tbody>
-            </table>
+
 
 
             </div>
         </div>
 
-    </div> <!--div class panel -->
-</div>   <!--div populate() -->
+    </div>
+    <!--div class panel -->
+</div>
+<!--div populate() -->
