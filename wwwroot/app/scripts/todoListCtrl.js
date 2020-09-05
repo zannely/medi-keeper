@@ -69,7 +69,7 @@ angular.module('todoApp')
         todoListSvc.putItem({
             'id': todo.id,
             'name': $scope.editInProgressTodo.name,
-            'cost': parseInt($scope.editInProgressTodo.cost),
+            'cost': parseFloat($scope.editInProgressTodo.cost),
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.populate();
@@ -89,7 +89,7 @@ angular.module('todoApp')
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
-            $scope.newToDoCost = 0;
+            $scope.newToDoCost = "";
             $scope.populate();
         }).error(function (err) {
             $scope.error = err;
