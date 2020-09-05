@@ -31,16 +31,12 @@
                     <h5>Add Item:</h5>
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="inlineFormAddItem">Item Name</label>
-                        <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem"
-                            placeholder="ItemName">
+                        <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem" placeholder="ItemName">
                     </div>
 
                     <div class="col-sm-3 my-1">
-                        <label class="sr-only" for="inlineFormInputGroupUsername">Cost</label>
-                        <div class="input-group">
-                            <input ng-model="newToDoCost" class="form-control" id="inlineFormInputGroupUsername"
-                                placeholder="0" type="number">
-                        </div>
+                        <label class="sr-only">Cost</label>
+                        <input ng-model="newToDoCost" class="form-control">
                     </div>
                     <div class="col-auto my-1">
                         <button ng-click="add();" class="btn btn-dark" id="validateAdd">Add</button>
