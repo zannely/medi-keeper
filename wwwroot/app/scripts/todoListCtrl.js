@@ -6,7 +6,7 @@ angular.module('todoApp')
     $scope.todoList = null;
     $scope.editingInProgress = false;
     $scope.newToDoName = "";
-    $scope.newToDoCost = 5;
+    $scope.newToDoCost = 0;
     $scope.editInProgressTodo = {
         name: "",
         cost: 0,
@@ -89,7 +89,7 @@ angular.module('todoApp')
         }).success(function (results) {
             $scope.loadingMsg = "";
             $scope.newToDoName = "";
-            // $scope.newToDoCost = "";
+            $scope.newToDoCost = 0;
             $scope.populate();
         }).error(function (err) {
             $scope.error = err;
