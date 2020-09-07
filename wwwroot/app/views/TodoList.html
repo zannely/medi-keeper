@@ -7,8 +7,8 @@
         <!-- Display list of items and search for max item given item name
         ================================================== -->
         <div class="d-flex justify-content-center ">
-            <!-- <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;"> -->
-            <div class="container" style="border:1px solid #cecece; margin:30px; padding:30px;">
+            <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;">
+            <!-- <div class="container" style="border:1px solid #cecece; margin:30px; padding:30px;"> -->
                 <!-- Search Max Price by Item Name
         ================================================== -->
                 <div class="form-row align-items-center">
@@ -82,34 +82,31 @@
                     </tbody>
 
                 </table>
-
             
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                     <!-- Display the max price for each item in the list-->
-                    <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
+                    <!-- <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button> -->
                     <!-- Display all items in the list-->
-                    <button ng-click="populate();" class="btn btn-default">Show All Items</button>
-                </div>
-
-
-
-
+                    <!-- <button ng-click="populate();" class="btn btn-default">Show All Items</button>
+                </div> -->
                 
-            </br>
+            <!-- </br> -->
 
+            <div class='wrapper text-center'>
                   <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle dr-breakout-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Show <span class="caret"></span>
+                      Show:
                     </button>
                     <ul class="dropdown-menu dr-breakout">
                         <li>
-                            <a role="button" (click)="showMax();">Max Prices</a>
+                            <a role="button" ng-click="showMax();";>Max Prices</a>
                         </li>
                         <li>
-                            <a role="button" (click)="populate();">All Items</a>
+                            <a role="button" ng-click="populate();">All Items</a>
                         </li>
                     </ul>
                   </div>
+            </div>
 
 
 
