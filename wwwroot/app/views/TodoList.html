@@ -7,8 +7,8 @@
         <!-- Display list of items and search for max item given item name
         ================================================== -->
         <div class="d-flex justify-content-center ">
-            <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;">
-
+            <!-- <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;"> -->
+            <div class="container" style="border:1px solid #cecece; margin:30px; padding:30px;">
                 <!-- Search Max Price by Item Name
         ================================================== -->
                 <div class="form-row align-items-center">
@@ -74,6 +74,7 @@
                                 <p data-ng-hide="item.edit || editingInProgress">
                                     <a data-ng-click="editSwitch(item)" href="javascript:;">Edit</a> |
                                     <a data-ng-click="delete(item.id)" href="javascript:;">Delete</a></p>
+
                                 <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a>
                                     <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>
                             </td>
@@ -83,7 +84,7 @@
                 </table>
 
                 <!-- Display the max price for each item in the list-->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group flex-wrap" role="group" aria-label="Basic example">
                     <!-- <div class="input-group"> -->
                     <span class="input-group-btn">
                         <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
@@ -96,6 +97,45 @@
                         <button ng-click="populate();" class="btn btn-default">Show All Items</button>
                     </span>
                 </div>
+
+
+
+
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
 
             </div>
         </div>
