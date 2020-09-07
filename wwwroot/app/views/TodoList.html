@@ -83,20 +83,38 @@
 
                 </table>
 
-                <!-- Display the max price for each item in the list-->
+            
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <!-- <div class="input-group"> -->
-                    <!-- <span class="input-group-btn"> -->
-                        <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
-                    <!-- </span> -->
-                    <!-- </div> -->
-
-                    <!-- Display all-->
-                    <!-- <div class="input-group"> -->
-                    <!-- <span class="input-group-btn"> -->
-                        <button ng-click="populate();" class="btn btn-default">Show All Items</button>
-                    <!-- </span> -->
+                    <!-- Display the max price for each item in the list-->
+                    <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
+                    <!-- Display all items in the list-->
+                    <button ng-click="populate();" class="btn btn-default">Show All Items</button>
                 </div>
+
+
+
+
+                
+            </br>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle dr-breakout-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Show: <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dr-breakout">
+                      <li>
+                        <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button>
+                      </li>
+                      <li>
+                        <button ng-click="populate();" class="btn btn-default">Show All Items</button>
+                      </li>
+                    </ul>
+                  </div>
+
+
+
+
+
+
 
 
 
