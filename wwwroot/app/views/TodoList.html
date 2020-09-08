@@ -16,7 +16,7 @@
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="inlineFormInputName">Item Name</label>
                         <input ng-model="searchName" class="form-control" id="inlineFormInputName"
-                            placeholder="ItemName">
+                        type="text" required=""  placeholder="ItemName">
                     </div>
                     <div class="col-auto my-1">
                         <button ng-click="showMaxByName();" class="btn btn-dark" id="validateSearch">Search</button>
@@ -31,12 +31,12 @@
                     <h5>Add Item:</h5>
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="inlineFormAddItem">Item Name</label>
-                        <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem" placeholder="ItemName">
+                        <input ng-model="newToDoName" class="form-control" id="inlineFormAddItem" type="text" required=""  placeholder="ItemName">
                     </div>
 
                     <div class="col-sm-3 my-1">
                         <label class="sr-only">Cost</label>
-                        <input ng-model="newToDoCost" class="form-control">
+                        <input ng-model="newToDoCost" class="form-control costValue" type="text" required="" placeholder="$0"> 
                     </div>
                     <div class="col-auto my-1">
                         <button ng-click="add();" class="btn btn-dark" id="validateAdd">Add</button>
@@ -62,13 +62,13 @@
                             </td>
                             <td>
                                 <span>{{item.name}}</span>
-                                <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.name"
-                                    class="form-control" />
+                                <input data-ng-show="item.edit" class="form-control nameValueEdit" type="text" data-ng-model="editInProgressTodo.name"
+                                 required=""/>
                             </td>
                             <td>
                                 <span>{{item.cost}}</span>
-                                <input data-ng-show="item.edit" type="text" data-ng-model="editInProgressTodo.cost"
-                                    class="form-control" />
+                                <input data-ng-show="item.edit" class="form-control costValueEdit" type="text" data-ng-model="editInProgressTodo.cost"
+                                 required=""/>
                             </td>
                             <td>
                                 <p data-ng-hide="item.edit || editingInProgress">
@@ -83,14 +83,6 @@
 
                 </table>
             
-                <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
-                    <!-- Display the max price for each item in the list-->
-                    <!-- <button ng-click="showMax();" class="btn btn-default">Show Max Prices</button> -->
-                    <!-- Display all items in the list-->
-                    <!-- <button ng-click="populate();" class="btn btn-default">Show All Items</button>
-                </div> -->
-                
-            <!-- </br> -->
 
             <div class='wrapper text-center'>
                   <div class="btn-group">
@@ -109,45 +101,6 @@
             </div>
 
 
-
-
-
-
-
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button> -->
-  
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-
-
-
-
-
-
             </div>
         </div>
 
@@ -157,7 +110,7 @@
 <!--div populate() -->
 
 <script>
-    //  Bind the event handler to the "submit" JavaScript event
+    //validation - item name cannot be empty on add
     $('#validateAdd').click(function () {
         // Get the value
         var name = $('#inlineFormAddItem').val();
@@ -168,6 +121,7 @@
         }
     });
 
+    // validation - item name cannot be empty on search
     $('#validateSearch').click(function () {
         // Get the value
         var search = $('#inlineFormInputName').val();
@@ -176,5 +130,20 @@
             alert('Item name cannot be empty.');
             return false;
         }
+    });
+
+    //validation on cost input to take only int values
+    $('input.costValue').on('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g,'').replace(/[^\d]/,'');
+    });
+
+    //validation on cost edit value to take only int values
+    $('input.costValueEdit').on('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g,'').replace(/[^\d]/,'');
+    });
+
+    //validation on name edit to take only letters and numbers
+    $('input.nameValueEdit').on('input', function() {
+        this.value = this.value.replace(/[^a-z0-9.]/gi,'').replace(/[^\d]/,'');
     });
 </script>
