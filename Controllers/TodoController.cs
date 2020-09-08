@@ -21,13 +21,13 @@ namespace TodoApi.Controllers
     {
         private readonly TodoContext _context;
         
-        private readonly CrudService _crudService; ////////////
+        private readonly CrudService _crudService;
         private readonly MaxPriceService _maxPriceService;
 
         public TodoController(TodoContext context, CrudService crudService, MaxPriceService maxPriceService)
         {
             _context = context;
-            _crudService = crudService;  /////////
+            _crudService = crudService;
             _maxPriceService = maxPriceService;
         }
 
@@ -46,23 +46,80 @@ namespace TodoApi.Controllers
             {
                 return NotFound();
             }
-
             return cost;
         }
 
+        // verify if item name exists
         private bool TodoItemNameExists(string name)
         {
             return _context.TodoItems.Any(n => n.Name == name);
         }
-
 
         // GET: api/Todo/MaxPrices
         [HttpGet("MaxPrices")]
         public ActionResult<List<TodoItem>> GetMaxPrices() => 
             _maxPriceService.GetMaxPrices();
 
+        // POST: api/Todo
+        [HttpPost]
+        public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
+        {
+            _context.TodoItems.Add(todoItem);
+            await _context.SaveChangesAsync();
 
+            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+        }
 
+        // DELETE: api/Todo/id
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<TodoItem>> DeleteTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.TodoItems.Remove(todoItem);
+            await _context.SaveChangesAsync();
+
+            return todoItem;
+        }
+
+        // PUT: api/Todo/id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
+        {
+            if (id != todoItem.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(todoItem).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoItemExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool TodoItemExists(long id)
+        {
+            return _context.TodoItems.Any(e => e.Id == id);
+        }
 
         // // GET: api/Todo
         // [HttpGet]
@@ -115,15 +172,15 @@ namespace TodoApi.Controllers
         //     return NoContent();
         // }
 
-        // POST: api/Todo
-        [HttpPost]
-        public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
-        {
-            _context.TodoItems.Add(todoItem);
-            await _context.SaveChangesAsync();
+        // // POST: api/Todo
+        // [HttpPost]
+        // public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
+        // {
+        //     _context.TodoItems.Add(todoItem);
+        //     await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
-        }
+        //     return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+        // }
 
         // // DELETE: api/Todo/id
         // [HttpDelete("{id}")]

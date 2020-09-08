@@ -32,8 +32,8 @@ namespace TodoApi
 
             services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
 
-            services.AddScoped<CrudService>(); ////
-            services.AddScoped<MaxPriceService>(); ////
+            services.AddScoped<CrudService>();
+            services.AddScoped<MaxPriceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
