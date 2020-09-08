@@ -10,7 +10,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://medi-keeper-app.azurewebsites.net"
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }

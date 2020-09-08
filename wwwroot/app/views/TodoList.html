@@ -7,7 +7,7 @@
         <!-- Display list of items and search for max item given item name
         ================================================== -->
         <div class="d-flex justify-content-center ">
-            <div class="container-fluid" style="border:1px solid #cecece; margin:30px; padding:30px;">
+            <div class="container-fluid">
             <!-- <div class="container" style="border:1px solid #cecece; margin:30px; padding:30px;"> -->
                 <!-- Search Max Price by Item Name
         ================================================== -->
@@ -46,7 +46,7 @@
                 <br />
                 <!-- Display Table With List Of Items
             ================================================== -->
-                <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
+                <!-- <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
@@ -81,8 +81,74 @@
                         </tr>
                     </tbody>
 
-                </table>
+                </table> -->
             
+
+            <!-- <div class='wrapper text-center'>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle dr-breakout-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Show:
+                    </button>
+                    <ul class="dropdown-menu dr-breakout">
+                        <li>
+                            <a role="button" ng-click="showMax();";>Max Prices</a>
+                        </li>
+                        <li>
+                            <a role="button" ng-click="populate();">All Items</a>
+                        </li>
+                    </ul>
+                  </div>
+            </div> -->
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Cost</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in todoList">
+                    <td>
+                        <span>{{item.id}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.name}}</span>
+                        <input data-ng-show="item.edit" class="form-control nameValueEdit" type="text" data-ng-model="editInProgressTodo.name"
+                         required=""/>
+                    </td>
+                    <td>
+                        <span>{{item.cost}}</span>
+                        <input data-ng-show="item.edit" class="form-control costValueEdit" type="text" data-ng-model="editInProgressTodo.cost"
+                         required=""/>
+                    </td>
+                    <td>
+                        <p data-ng-hide="item.edit || editingInProgress">
+                            <a data-ng-click="editSwitch(item)" href="javascript:;">Edit</a> |
+                            <a data-ng-click="delete(item.id)" href="javascript:;">Delete</a></p>
+
+                        <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a>
+                            <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+
 
             <div class='wrapper text-center'>
                   <div class="btn-group">
@@ -101,8 +167,7 @@
             </div>
 
 
-            </div>
-        </div>
+
 
     </div>
     <!--div class panel -->
