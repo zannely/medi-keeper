@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TodoApi.Models;
+using TodoApi.Services;
 
 namespace TodoApi
 {
@@ -30,6 +31,9 @@ namespace TodoApi
             });
 
             services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
+
+            services.AddScoped<CrudService>(); ////
+            services.AddScoped<MaxPriceService>(); ////
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
