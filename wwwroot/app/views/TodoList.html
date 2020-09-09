@@ -3,12 +3,9 @@
     <p>{{loadingMessage}}</p>
     <div class="panel">
 
-
-        <!-- Display list of items and search for max item given item name
-        ================================================== -->
         <div class="d-flex justify-content-center ">
             <div class="container-fluid">
-            <!-- <div class="container" style="border:1px solid #cecece; margin:30px; padding:30px;"> -->
+                
                 <!-- Search Max Price by Item Name
         ================================================== -->
                 <div class="form-row align-items-center">
@@ -24,9 +21,8 @@
                 </div>
                 <br />
 
-                <!-- Add Item
+                <!-- Add New Item and Cost
             ================================================== -->
-
                 <div class="form-row align-items-center">
                     <h5>Add Item:</h5>
                     <div class="col-sm-3 my-1">
@@ -42,73 +38,12 @@
                         <button ng-click="add();" class="btn btn-dark" id="validateAdd">Add</button>
                     </div>
                 </div>
-
                 <br />
-                <!-- Display Table With List Of Items
-            ================================================== -->
-                <!-- <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Item Name</th>
-                            <th>Cost</th>
-                            <th>Edit/Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="item in todoList">
-                            <td>
-                                <span>{{item.id}}</span>
-                            </td>
-                            <td>
-                                <span>{{item.name}}</span>
-                                <input data-ng-show="item.edit" class="form-control nameValueEdit" type="text" data-ng-model="editInProgressTodo.name"
-                                 required=""/>
-                            </td>
-                            <td>
-                                <span>{{item.cost}}</span>
-                                <input data-ng-show="item.edit" class="form-control costValueEdit" type="text" data-ng-model="editInProgressTodo.cost"
-                                 required=""/>
-                            </td>
-                            <td>
-                                <p data-ng-hide="item.edit || editingInProgress">
-                                    <a data-ng-click="editSwitch(item)" href="javascript:;">Edit</a> |
-                                    <a data-ng-click="delete(item.id)" href="javascript:;">Delete</a></p>
-
-                                <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a>
-                                    <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>
-                            </td>
-                        </tr>
-                    </tbody>
-
-                </table> -->
-            
-
-            <!-- <div class='wrapper text-center'>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle dr-breakout-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Show:
-                    </button>
-                    <ul class="dropdown-menu dr-breakout">
-                        <li>
-                            <a role="button" ng-click="showMax();";>Max Prices</a>
-                        </li>
-                        <li>
-                            <a role="button" ng-click="populate();">All Items</a>
-                        </li>
-                    </ul>
-                  </div>
-            </div> -->
-
-
             </div>
         </div>
 
-
-
-
-
-
+            <!-- Display Table With List Of Items
+        ================================================== -->
         <table class="table table-striped" id="navigateTable" style="border:1px solid #cecece;">
             <thead class="thead-dark">
                 <tr>
@@ -125,31 +60,28 @@
                     </td>
                     <td>
                         <span>{{item.name}}</span>
-                        <input data-ng-show="item.edit" class="form-control nameValueEdit" type="text" data-ng-model="editInProgressTodo.name"
+                        <input data-ng-show="item.edit" class="form-control nameValueEdit" id="editItem" type="text" data-ng-model="editInProgressTodo.name"
                          required=""/>
                     </td>
                     <td>
                         <span>{{item.cost}}</span>
-                        <input data-ng-show="item.edit" class="form-control costValueEdit" type="text" data-ng-model="editInProgressTodo.cost"
+                        <input data-ng-show="item.edit" class="form-control costValueEdit" id="editCost" type="text" data-ng-model="editInProgressTodo.cost"
                          required=""/>
                     </td>
                     <td>
                         <p data-ng-hide="item.edit || editingInProgress">
-                            <a data-ng-click="editSwitch(item)" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> |
-                            <a data-ng-click="delete(item.id)" href="javascript:;"><span class="glyphicon glyphicon-remove-circle"></span></a></p>
+                            <a data-ng-click="editSwitch(item)" id="btnEditItems" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> |
+                            <a data-ng-click="delete(item.id)" id="deleteItem" href="javascript:;"><span class="glyphicon glyphicon-remove-circle"></span></a></p>
 
-                        <p data-ng-show="item.edit"><a data-ng-click="update(item)" href="javascript:;">Save</a>
+                        <p data-ng-show="item.edit"><a data-ng-click="update(item)" id="saveEdition" href="javascript:;">Save</a>
                             <a data-ng-click="editSwitch(item)" href="javascript:;">Cancel</a></p>
                     </td>
                 </tr>
             </tbody>
-
         </table>
 
-
-
-
-
+            <!-- Button options for Show Max Prices and Show All Items
+        ================================================== -->
             <div class='wrapper text-center'>
                   <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle dr-breakout-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -157,7 +89,7 @@
                     </button>
                     <ul class="dropdown-menu dr-breakout">
                         <li>
-                            <a role="button" ng-click="showMax();";>Max Prices</a>
+                            <a role="button" ng-click="showMax();" id = "btnMaxPrices">Max Prices</a>
                         </li>
                         <li>
                             <a role="button" ng-click="populate();">All Items</a>
@@ -165,14 +97,8 @@
                     </ul>
                   </div>
             </div>
-
-
-
-
-    </div>
-    <!--div class panel -->
-</div>
-<!--div populate() -->
+    </div><!--div class panel -->
+</div><!--div populate() -->
 
 <script>
     //validation - item name cannot be empty on add

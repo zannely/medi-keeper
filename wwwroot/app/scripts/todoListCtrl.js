@@ -2,7 +2,6 @@
 angular.module('todoApp')
 .controller('todoListCtrl', ['$scope', '$location', 'todoListSvc', function ($scope, $location, todoListSvc) {
     $scope.error = "";
-    $scope.meditest = "I am a test.";
     $scope.loadingMessage = "Loading...";
     $scope.todoList = null;
     $scope.editingInProgress = false;
@@ -13,9 +12,6 @@ angular.module('todoApp')
         cost: 0,
         id: 0
     };
-
-    var vm = this;
-    vm.meditest = 'I am a test.';
     
     $scope.showMax = function () {
         todoListSvc.getMaxPrices().success(function (results) {
