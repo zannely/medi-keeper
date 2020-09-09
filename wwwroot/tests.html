@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/carousel/">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles/app-style.css">
+    <!-- Add Jasmine -->
+    <script data-require="jasmine@*" data-semver="2.0.0" src="//cdn.jsdelivr.net/jasmine/2.0.0/jasmine.js"></script>
+    <!-- Jasmine html & css for reporting -->
+    <link data-require="jasmine@*" data-semver="2.0.0" rel="stylesheet" href="//cdn.jsdelivr.net/jasmine/2.0.0/jasmine.css" />
+    <script data-require="jasmine@*" data-semver="2.0.0" src="//cdn.jsdelivr.net/jasmine/2.0.0/jasmine-html.js"></script>
+    <script data-require="jasmine@*" data-semver="2.0.0" src="//cdn.jsdelivr.net/jasmine/2.0.0/boot.js"></script>
+    <!-- Add AngularJS -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script> -->
+    <script data-require="angular.js@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
+
+    <script src="https://code.angularjs.org/1.2.25/angular-route.js"></script>
+    <script data-require="angular-mocks@*" data-semver="1.2.16" src="https://code.angularjs.org/1.2.16/angular-mocks.js"></script>
+
+    <!-- <script data-require="angular.js@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script> -->
+    <!-- AngularJS testing helpers -->
+    <title>MediTask</title>
+
+<!-- </div> -->
+    <!-- Jumbotron -->
+</head>
+
+<!-- <body> -->
+
+<body ng-app="todoApp" role="document">
+
+    <!-- <div class="d-flex justify-content-center "> -->
+        <div class="container-fluid">
+
+            <!-- MKList
+            ================================================== -->
+            <br />
+            <div class="container" role="main">
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div ng-view class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+    <!-- </div> -->
+
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="app/scripts/app.js"></script>
+    <script src="app/scripts/todoListCtrl.js"></script>
+    <script src="app/scripts/todoListSvc.js"></script>
+    <script type="text/javascript">
+        // var apiEndpoint = "https://medi-keeper-app.azurewebsites.net"; 
+        var apiEndpoint = "http://localhost:5000"; 
+    </script>
+
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- This is our test spec -->
+<script type="text/javascript">
+      
+    describe("Unit: todoListCtrl tests", function() {
+      
+      // setup code for testing this unit
+      var controller;
+      beforeEach(function(){
+        module('todoApp');
+        
+        inject(function ($controller){
+          controller = $controller('todoListCtrl');  
+        });
+        
+      });
+      
+      it("PASSING TEST - should be able to display a title", function() {
+        expect(controller.meditest).toBe('I am a test.');
+      });
+      
+    });
+    
+  </script>

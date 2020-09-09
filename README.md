@@ -23,3 +23,5 @@ See [LICENSE](https://github.com/Azure-Samples/dotnet-core-api/blob/master/LICEN
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
   
+### Testing
+To start Selenium test suite, you will have to `npm install` the local package.json file. After installing dev dependencies, you can execute `npm run start` which will start webdriver-manager and in a separate terminal run `npm run test` to run medikeeper_spec.js in test folder.
