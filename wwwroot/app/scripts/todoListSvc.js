@@ -28,6 +28,12 @@ angular.module('todoApp')
         },
         getMaxPrices : function(){
             return $http.get(apiEndpoint + '/api/Todo/MaxPrices');
+        },
+        deleteAll : function(){
+            return $http({
+                method: 'DELETE',
+                url: apiEndpoint + '/api/Todo/DeleteAll'
+            });
         }
     };
 }]);

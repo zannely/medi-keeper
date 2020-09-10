@@ -2,8 +2,17 @@
 const { element } = require("protractor");
 
 describe('MediTask UnitTest', function() {
-it('should have a title', function() {
+
+it('All items should get cleared', function() {
     browser.get('http://localhost:5000/#/Home');
+    // clear all items in table
+    var clearAll = element(by.id('clearAllItems'));
+    clearAll.click();
+    expect(element.all(by.repeater('item in todoList')).count()).toEqual(0);
+});
+
+it('should have a title', function() {
+    // browser.get('http://localhost:5000/#/Home');
     expect(browser.getTitle()).toEqual('MediTask');
 });
 

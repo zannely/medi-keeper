@@ -95,4 +95,15 @@ angular.module('todoApp')
             $scope.loadingMsg = "";
         })
     };
+
+    $scope.clearAll = function () {
+        todoListSvc.deleteAll().success(function (results) {
+            $scope.todoList = results;
+            $scope.loadingMessage = "";
+        }).error(function (err) {
+            $scope.error = err;
+            $scope.loadingMessage = "";
+        })
+    };
+
 }]);

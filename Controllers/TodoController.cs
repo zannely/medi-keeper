@@ -121,5 +121,15 @@ namespace TodoApi.Controllers
             return _context.TodoItems.Any(e => e.Id == id);
         }
 
+        // DELETE: api/Todo/DeleteAll
+        [HttpDelete("DeleteAll")]
+        public void DeleteAll()
+        {
+            foreach (var todoItem in _context.TodoItems)
+            {
+                _context.TodoItems.Remove(todoItem);
+            }
+            _context.SaveChangesAsync();
+        }
     }
 }
